@@ -3,14 +3,14 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
-import Layout,{siteTilte} from '../../components/Layout'
+import Layout, { siteTilte } from '../../components/Layout'
 import utilis from '../styles/utils.module.css'
 import { getPostData } from '../../lib/post'
 
 
-
 const inter = Inter({ subsets: ['latin'] })
 
+// getData()
 //SSGの場合
 export async function getStaticProps() {
   const allPostsData = getPostData();
@@ -25,7 +25,7 @@ export async function getStaticProps() {
 
 //SSRの場合
 // export async function getServerSideProps(context){
-  
+
 
 //   return{
 //     props:{
@@ -42,19 +42,20 @@ export default function Home({ allPostsData }) {
 
   return (
     <Layout home>
-    <Head>
-      <title>{siteTilte}</title>
-    </Head>
+      <Head>
+        <title>{siteTilte}</title>
+      </Head>
       <section className={utilis.headingMd}>
-        <p>これは、React x Next.js練習のためのサンプルサイトです。</p>
+        <p>これは、React x Next.js練習のためのサンプルサイトです。2023/07/07</p>
       </section>
 
       <section>
         <h2>📝Dannyのブログ</h2>
       </section>
-
+      <Link href={"./getData"}><h2>getData</h2></Link>
       <div className={styles.grid}>
-        {allPostsData.map(({id, title, date, thumbnail}) => (
+
+        {allPostsData.map(({ id, title, date, thumbnail }) => (
           <article key={id}>
             <Link href={`/posts1/${id}`}>
               <Image className={styles.thumbnailImage} src={thumbnail} alt="" width={200} height={200}></Image>
@@ -64,7 +65,7 @@ export default function Home({ allPostsData }) {
             </Link>
             <br />
             <small className={utilis.lightText}>
-             {date}
+              {date}
             </small>
           </article>
         ))}
